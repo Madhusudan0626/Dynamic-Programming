@@ -1,13 +1,11 @@
-//Matrix chain Multiplication
-#include <stdio.h>
-#include <stdlib.h>
-#include <limits.h>
-
-void makematrix(int *a,int *b,int n);
-void display(int *a,int n);
-int getminimumcost(int *a,int i,int j);
-
-int ar[3][3];
+/********************************************************************************************************
+ ********************************************************************************************************
+ Name - Madhusdan chand
+ Prog - Write a C program to implement parenthesization problem. (Matrix chain multiplication)
+ Date - 15/06/2022
+ ********************************************************************************************************
+*********************************************************************************************************/
+#include "mcmsoul.h"
 
 int main()
 {
@@ -26,72 +24,95 @@ int main()
             printf("Insufficient Memory\n");
         else
         {
-            //makematrix(a,b,n);
-            int m[]={4,5,6,9};
-            display(m,n);
-
-            int get=getminimumcost(m,1,n);
+            makematrix(a,b,n);
+            int get=getminimumcost(b,1,n);
             printf("Minimum cost : %d\n",get);
-            for(int i=1;i<=n;i++)
-            {
-                for(int j=1;j<=n;j++)
-                {
-                    printf("%6d  ",ar[i][j]);
-                }
-                printf("\n");
-            }
+            
+            printf("\nCost Matrix\n");
+            displaypro(n);
+            printf("Parenthesized Matrix\n");
+            displaymax(n);
         }
     }
     return 0;
 }
+/*
+Enter the Number of Matrcies
+6
+Enter the dimension of the 1 matrix
+30 35
+Enter the dimension of the 2 matrix
+35 15
+Enter the dimension of the 3 matrix
+15 5
+Enter the dimension of the 4 matrix
+5 10
+Enter the dimension of the 5 matrix
+10 20
+Enter the dimension of the 6 matrix
+20 25
+Vlaue of K is 5
+Cost from A5 x A6 is : 5000
+Vlaue of K is 4
+Cost from A4 x A6 is : 6250
+Vlaue of K is 4
+Cost from A4 x A5 is : 1000
+Vlaue of K is 5
+Cost from A4 x A6 is : 3500
+Vlaue of K is 3
+Cost from A3 x A6 is : 5375
+Vlaue of K is 3
+Cost from A3 x A4 is : 750
+Vlaue of K is 3
+Cost from A3 x A5 is : 2500
+Vlaue of K is 2
+Cost from A2 x A6 is : 18500
+Vlaue of K is 2
+Cost from A2 x A3 is : 2625
+Vlaue of K is 3
+Cost from A2 x A6 is : 10500
+Vlaue of K is 2
+Cost from A2 x A4 is : 6000
+Vlaue of K is 3
+Cost from A2 x A4 is : 4375
+Vlaue of K is 2
+Cost from A2 x A5 is : 13000
+Vlaue of K is 3
+Cost from A2 x A5 is : 7125
+Vlaue of K is 1
+Cost from A1 x A6 is : 36750
+Vlaue of K is 1
+Cost from A1 x A2 is : 15750
+Vlaue of K is 2
+Cost from A1 x A6 is : 32375
+Vlaue of K is 1
+Cost from A1 x A3 is : 7875
+Vlaue of K is 3
+Cost from A1 x A6 is : 15125
+Vlaue of K is 1
+Cost from A1 x A4 is : 14875
+Vlaue of K is 3
+Cost from A1 x A4 is : 9375
+Vlaue of K is 1
+Cost from A1 x A5 is : 28125
+Vlaue of K is 2
+Cost from A1 x A5 is : 27250
+Vlaue of K is 3
+Cost from A1 x A5 is : 11875
+Minimum cost : 15125
 
-void makematrix(int *a,int *b,int n)
-{
-    int i=0,j=0,c;
+Cost Matrix
+ 15750    7875    9375   11875   15125  
+  2625    4375    7125   10500  
+   750    2500    5375  
+  1000    3500  
+  5000  
 
-    while(n>0)
-    {
-        printf("Enter the dimension of the %d matrix\n",++i);
-        scanf("%d%d",&a[j],&a[j+1]);
-        j+=2;
-        n--;
-    }
-    b[0]=a[0];
-
-    for(i=1,c=1;i<=j;i++)
-    {
-        if(i%2!=0)
-            b[c++]=a[i];
-    }
-}
-
-void display(int *a,int n)
-{
-    int i;
-    for(i=0;i<=n;i++)
-        printf("%d ",a[i]);
-    printf("\n");
-}
-
-int getminimumcost(int *a,int i,int j)
-{
-    if(i>=j)
-        return 0;
-    int min = INT_MAX;
-
-    for(int k=i;k<=j-1;k++)
-    {
-        int temp=getminimumcost(a,i,k)+getminimumcost(a,k+1,j)+a[i-1]*a[k]*a[j];
-        
-        ar[i][j]=temp;
-
-        if(temp<min)
-        {
-            printf("Min for %d is %d value of i is %d and j is %d\n",k,temp,i,j);
-            min=temp; 
-            
-        }    
-    }
-    
-    return min;
-}
+Parenthesized Matrix
+     1       1       3       3       3  
+     2       3       3       3  
+     3       3       3  
+     4       5  
+     5  
+  
+*/
